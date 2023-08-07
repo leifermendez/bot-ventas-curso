@@ -128,18 +128,9 @@ const flowSendLink = addKeyword(EVENTS.ACTION)
   .addAnswer(["🚀🚀"], null, async (_, { flowDynamic, state }) => {
     console.log("🙉 texto a voz....");
     const currentState = state.getMyState();
-    const txt = currentState.answer.replace(
-      "https://link.codigoencasa.com/CURSO-CHATBOT",
-      ""
-    );
-    await flowDynamic(txt);
-    await flowDynamic("https://link.codigoencasa.com/CURSO-CHATBOT");
+    await flowDynamic(currentState);
   })
-  .addAnswer(
-    [
-      `Perfecto te voy a generar un link de pago`,
-    ]
-  )
+  .addAnswer(`El cupon lo debes de aplicar aqui`,{media:'https://i.imgur.com/Y1rBTFu.png'})
   .addAnswer(
     "Generando link de pago...",
     null,
