@@ -137,33 +137,21 @@ const flowSendLink = addKeyword(EVENTS.ACTION)
   })
   .addAnswer(
     [
-      `Solo necesito un dato más para que comiences a disfrutar del contenido.`,
-      `¿Cual es tu email?`,
-    ],
-    { capture: true },
-    async (ctx, { fallBack, state }) => {
-      const email = ctx.body;
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-      if (!emailRegex.test(email)) {
-        return fallBack(`Debes proporcionar un email valido`);
-      }
-
-      state.update({ email });
-    }
+      `Perfecto te voy a generar un link de pago`,
+    ]
   )
   .addAnswer(
     "Generando link de pago...",
     null,
     async (ctx, { flowDynamic }) => {
-      const response = await handlerStripe();
-      await adapterDB.createIntent({
-        url: response.url,
-        phone: ctx.from,
-        status: "wait",
-        dateAt: new Date(),
-      });
-      await flowDynamic(`Este es tu link: ${response.url}`);
+     const response = await handlerStripe();
+    await adapterDB.createIntent({
+      url: response.url,
+      phone: ctx.from,
+      status: "wait",
+      dateAt: new Date(),
+    });
+    await flowDynamic(`Este es tu link: ${response.url}`);
     }
   );
 
