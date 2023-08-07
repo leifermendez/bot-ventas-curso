@@ -15,6 +15,7 @@ const { textToVoice } = require("./services/eventlab");
 const { handlerStripe } = require("./services/stripe");
 const app = express();
 const fs = require("fs");
+const { join } = require("path");
 const delay = (miliseconds) =>
   new Promise((res) => setTimeout(res, miliseconds));
 
@@ -44,10 +45,9 @@ app.get("/api/send-success", async (req, res) => {
   const phone = req.query.phone;
   const check = await adapterDB.findIntent(phone);
 
-
-  if(!check){
+  if (!check) {
     res.send({ data: "error!" });
-    return
+    return;
   }
 
   if (!["success"].includes(check.status)) {
@@ -66,9 +66,9 @@ app.get("/api/send-fail", async (req, res) => {
   const phone = req.query.phone;
   const check = await adapterDB.findIntent(phone);
 
-  if(!check){
+  if (!check) {
     res.send({ data: "error!" });
-    return
+    return;
   }
 
   if (!["success", "fail"].includes(check.status)) {
@@ -81,6 +81,14 @@ app.get("/api/send-fail", async (req, res) => {
   }
 
   res.send({ data: "ok!" });
+});
+
+app.get("/api/qr", async (_, res) => {
+  const PATH_QR = join(process.cwd(), `bot.qr.png`);
+  const fileStream = fs.createReadStream(PATH_QR);
+
+  res.writeHead(200, { "Content-Type": "image/png" });
+  fileStream.pipe(res);
 });
 
 /**
