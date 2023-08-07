@@ -5,5 +5,3 @@ trabajando con lenguajes de programacion como javaScript ya que todo el desarrol
 tambien aprenderas a como enviar mensajes atravez de api, y conectar con base de datos como mongo, mysql, firebase y tambien
 puedes aprender a crear tu propio conecto de base de datos. En el curso tambien se enseña a desplegar o llevar tu
 bot a produccion en aws.
-El precio del curso suele ser de 39USD dolares pero en esta ofer especial puedes disfrutar de 35% de descuento
-lo cual hoy lo puedes adquiere por 25USD

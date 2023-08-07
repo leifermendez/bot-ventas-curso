@@ -157,7 +157,13 @@ const flowSendLink = addKeyword(EVENTS.ACTION)
     null,
     async (ctx, { flowDynamic }) => {
       const response = await handlerStripe();
-      console.log(response);
+      await adapterDB.createIntent({
+        url: response.url,
+        phone: ctx.from,
+        status: "wait",
+        dateAt: new Date(),
+      });
+      await flowDynamic(`Este es tu link: ${response.url}`);
     }
   );
 
