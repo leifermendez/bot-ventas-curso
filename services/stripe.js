@@ -1,4 +1,4 @@
-const handlerStripe = async (phone) => {
+const handlerStripe = async (phone = '') => {
 
   const stripeApiBase64 = process.env.STRIPE_SK
   const priceId = process.env.PRODUCT_ID;

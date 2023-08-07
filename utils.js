@@ -19,4 +19,7 @@ const handlerAI = async (ctx) => {
    */
 };
 
-module.exports = { handlerAI };
+const delay = (miliseconds) =>
+  new Promise((res) => setTimeout(res, miliseconds));
+
+module.exports = { handlerAI, delay };
