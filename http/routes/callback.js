@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const { ctrlSuccessPayment } = require("../controllers/callback");
+const { ctrlCallBack } = require("../controllers/callback");
 const router = Router()
 
 /**
  * Ruta cuando se realiza un pago exitoso
  */
-router.get("/", ctrlSuccessPayment);
+router.get("/", ctrlCallBack);
 
 module.exports = router

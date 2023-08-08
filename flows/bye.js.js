@@ -4,7 +4,13 @@ const { addKeyword } = require("@bot-whatsapp/bot");
  *
  * @returns
  */
-const flowAdios = () =>
-  addKeyword(["adios", "bye", "chao"]).addAnswer("Nos vemos!");
+const flowAdios = (globalState) =>
+  addKeyword(["adios", "bye", "chao"])
+    .addAction((_, { endFlow }) => {
+      if (!globalState.status) {
+        return endFlow();
+      }
+    })
+    .addAnswer("Nos vemos!");
 
 module.exports = { flowAdios };

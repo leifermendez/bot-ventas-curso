@@ -4,16 +4,14 @@ const { delay } = require("../utils/utils");
 /**
  * Flow de explicacion experta
  */
-const flowVozExperto = (globalState) =>
+const flowGreeting = (globalState) =>
   addKeyword(EVENTS.ACTION)
     .addAction((_, { endFlow }) => {
       if (!globalState.status) {
         return endFlow();
       }
     })
-    .addAnswer(
-      ["dame un momento..."],
-      null,
+    .addAction(
       async (_, { flowDynamic, state }) => {
         const currentState = state.getMyState();
 
@@ -25,4 +23,4 @@ const flowVozExperto = (globalState) =>
       }
     );
 
-module.exports = { flowVozExperto };
+module.exports = { flowGreeting };

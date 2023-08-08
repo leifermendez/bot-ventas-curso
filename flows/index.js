@@ -6,6 +6,8 @@ const { flowAudioVideo } = require("./giveMedia");
 const { flowPDF } = require("./givePdf");
 const { flowAdios } = require("./bye.js");
 const { flowVoiceNote } = require("./giveVoiceNote");
+const { flowOff, flowOn } = require("./onOff");
+const { flowGreeting } = require("./greeting");
 
 module.exports = {
   flowWelcome,
@@ -15,5 +17,8 @@ module.exports = {
   flowAudioVideo,
   flowPDF,
   flowAdios,
-  flowVoiceNote
+  flowVoiceNote,
+  flowOn,
+  flowOff,
+  flowGreeting
 };

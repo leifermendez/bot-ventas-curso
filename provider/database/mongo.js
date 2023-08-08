@@ -6,7 +6,6 @@ class MongoAdapter {
   credentials = { dbUri: null, dbName: null };
   constructor(_credentials) {
     this.credentials = _credentials;
-    this.init().then();
   }
 
   init = async () => {
@@ -61,6 +60,10 @@ class MongoAdapter {
     return await this.db
       .collection("intents")
       .findOne({ phone }, { sort: { dateAt: -1 } });
+  };
+
+  getAgents = async () => {
+    return await this.db.collection("agents").find({}).toArray();
   };
 }
 

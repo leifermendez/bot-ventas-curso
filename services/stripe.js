@@ -1,4 +1,6 @@
-const handlerStripe = async (phone = '') => {
+const { encryptData } = require("../utils/hash");
+
+const handlerStripe = async (phone = '', email = '') => {
 
   const stripeApiBase64 = process.env.STRIPE_SK
   const priceId = process.env.PRODUCT_ID;
@@ -15,8 +17,8 @@ const handlerStripe = async (phone = '') => {
   urlencoded.append("line_items[0][quantity]", "1");
   urlencoded.append("allow_promotion_codes", "true");
   urlencoded.append("customer_creation", "always");
-  urlencoded.append("success_url", `${FRONT_URL}/api/send-success?phone=${phone}`);
-  urlencoded.append("cancel_url", `${FRONT_URL}/api/send-fail?phone=${phone}`);
+  urlencoded.append("success_url", `${FRONT_URL}/api/callback?p=${encryptData(`${phone}__success__${email}`)}`);
+  urlencoded.append("cancel_url", `${FRONT_URL}/api/callback?p=${encryptData(`${phone}__fail__${email}`)}`);
   urlencoded.append("mode", "payment");
 
   const requestOptions = {
@@ -27,7 +29,6 @@ const handlerStripe = async (phone = '') => {
 
   const stripeRequest = await fetch(URL, requestOptions);
   const response = await stripeRequest.json();
-
   return response
 };
 
