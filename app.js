@@ -4,12 +4,6 @@ const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 
 const ServerAPI = require("./http");
 
-/**
- * TODO:
- * - Arreglar las nuevas url de callback
- * - remove cosas no usadas
- */
-
 const {
   flowWelcome,
   flowVozVentas,

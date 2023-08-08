@@ -47,7 +47,7 @@ const flowSendLink = (globalState, adapterDB) =>
           dateAt: new Date(),
           email: currentState.email,
         });
-
+        state.update({ answer: "" });
         await flowDynamic(`Este es tu link: ${response.url}`);
       }
     );
