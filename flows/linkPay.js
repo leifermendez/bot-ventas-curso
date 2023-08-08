@@ -1,4 +1,4 @@
-const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
+const { addKeyword } = require("@bot-whatsapp/bot");
 const { handlerStripe } = require("../services/stripe");
 
 /**
@@ -7,7 +7,7 @@ const { handlerStripe } = require("../services/stripe");
  * @returns
  */
 const flowSendLink = (globalState, adapterDB) =>
-  addKeyword(["olo"])
+  addKeyword(["andorra"])
     .addAction((_, { endFlow }) => {
       if (!globalState.status) {
         return endFlow();

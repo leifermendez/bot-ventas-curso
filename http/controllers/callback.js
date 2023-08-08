@@ -35,22 +35,24 @@ const ctrlCallBack = async (req, res) => {
   if (status === "success") {
     await adapterProvider.sendText(
       `${phone}@c.us`,
-      "Felicitaciones! ya tienes acceso al curso 🙌"
+      [
+        "Felicitaciones! ya tienes acceso al curso 🙌",
+        "Si tienes algun inconveniente puedes escribirme un mail a leifer.contacto@gmail.com",
+      ].join("\n")
     );
-    const code = await exchange("6414a7e79f01655a7fbe9ad1", email);
+    const code = await exchange(COURSE_ID, email);
     if (code === 404) {
       await register(email);
       await exchange(COURSE_ID, email);
     }
-    console.log(code);
-    res.send({ data: "Felicitaciones! ya tienes acceso al curso 🙌" });
+    res.redirect("https://app.codigoencasa.com/courses/curso-chatbot-whatsapp");
   }
 
   if (status === "fail") {
-    await adapterProvider.sendText(
-      `${phone}@c.us`,
-      "Algo opcurrio con tu pago. Intenta nuevamente 🤕"
-    );
+    await adapterProvider.sendText(`${phone}@c.us`, [
+      "Algo opcurrio con tu pago. Intenta nuevamente 🤕",
+      "Si tienes algun inconveniente puedes escribirme un mail a leifer.contacto@gmail.com",
+    ].join("\n"));
     res.send({ data: "Algo opcurrio con tu pago. Intenta nuevamente 🤕" });
   }
 
