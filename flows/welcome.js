@@ -14,17 +14,13 @@ const flowNotEmployeeWelcome = addKeyword(EVENTS.ACTION)
  */
 const flowWelcome = (globalState, employeesAddon) =>
   addKeyword(EVENTS.WELCOME)
-    .addAction((_, { endFlow }) => {
-      if (!globalState.status) {
-        return endFlow();
-      }
-    })
     .addAnswer("⏱️")
     .addAction(async (ctx, ctxFn) => {
       const text = ctx.body;
       const currentState = ctxFn.state.getMyState();
       const fullSentence = `${currentState?.answer ?? ""}. ${text}`;
       const { employee, answer } = await employeesAddon.determine(fullSentence);
+      console.log({employee, fullSentence })
       ctxFn.state.update({ answer });
       if (employee) employeesAddon.gotoFlow(employee, ctxFn);
       if (!employee) ctxFn.gotoFlow(flowNotEmployeeWelcome);

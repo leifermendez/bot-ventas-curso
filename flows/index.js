@@ -1,7 +1,7 @@
 const { flowWelcome } = require("./welcome");
 const { flowVozVentas } = require("./sales");
 const { flowVozExperto } = require("./expert");
-const { flowSendLink } = require("./linkPay");
+const { flowSendLink, flowMock } = require("./linkPay");
 const { flowAudioVideo } = require("./giveMedia");
 const { flowPDF } = require("./givePdf");
 const { flowAdios } = require("./bye.js");
@@ -20,5 +20,6 @@ module.exports = {
   flowVoiceNote,
   flowOn,
   flowOff,
-  flowGreeting
+  flowGreeting,
+  flowMock
 };

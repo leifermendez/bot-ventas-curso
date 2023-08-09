@@ -20,24 +20,15 @@ const flowSendLink = (globalState, adapterDB) =>
     .addAnswer(
       `Solo un dato más ¿Cual es tu email?`,
       { capture: true },
-      async (ctx, { fallBack, state }) => {
+      async (ctx, { fallBack, state, flowDynamic }) => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const email = ctx.body;
 
         if (!emailRegex.test(email)) {
           return fallBack("Debes introducir un email valido");
         }
-
         state.update({ email });
-      }
-    )
-    .addAnswer(`El cupon lo debes de aplicar aqui`, {
-      media: "https://i.imgur.com/Y1rBTFu.png",
-    })
-    .addAnswer(
-      "Generando link de pago...",
-      null,
-      async (ctx, { flowDynamic, state }) => {
+        await flowDynamic([{body:`El cupon lo debes de aplicar aqui`, media: "https://i.imgur.com/Y1rBTFu.png"}]);
         const currentState = state.getMyState();
         const response = await handlerStripe(ctx.from, currentState.email);
         await adapterDB.createIntent({

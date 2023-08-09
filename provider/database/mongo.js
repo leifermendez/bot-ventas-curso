@@ -22,6 +22,11 @@ class MongoAdapter {
     }
   };
 
+  clearHistory = async (from) => {
+    this.listHistory = []
+    await this.db.collection("history").deleteMany({from});
+  }
+
   getPrevByNumber = async (from) => {
     const result = await this.db
       .collection("history")
