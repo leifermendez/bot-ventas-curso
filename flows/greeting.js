@@ -12,13 +12,8 @@ const flowGreeting = (globalState) =>
       }
     })
     .addAction(async (_, { flowDynamic, state }) => {
-      const currentState = state.getMyState();
       state.update({ answer: "" });
-      const fullText = currentState.answer.split(". ");
-      for (const txt of fullText) {
-        await flowDynamic(txt);
-        await delay(1150);
-      }
+      await flowDynamic(`Buenas estoy aqui para vender! como puedo ayudarte`);
     });
 
 module.exports = { flowGreeting };
