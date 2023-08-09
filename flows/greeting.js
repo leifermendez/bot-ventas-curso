@@ -5,7 +5,7 @@ const { delay } = require("../utils/utils");
  * Flow de explicacion experta
  */
 const flowGreeting = (globalState) =>
-  addKeyword(EVENTS.ACTION)
+  addKeyword(['hola','ole','hi'])
     .addAction((_, { endFlow }) => {
       if (!globalState.status) {
         return endFlow();

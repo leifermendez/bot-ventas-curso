@@ -4,3 +4,4 @@
 - limpiar \n
 - intencion de despedida
 - cola de procesos
+- como manejar los mensajes que viene separados [cuanto, el curso]
