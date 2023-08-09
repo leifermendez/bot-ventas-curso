@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { createBot, createProvider, createFlow } = require("@bot-whatsapp/bot");
 const BaileysProvider = require("@bot-whatsapp/provider/baileys");
-
+const MockAdapter = require('@bot-whatsapp/database/mock')
 const ServerAPI = require("./http");
 
 const {
@@ -49,11 +49,11 @@ const main = async () => {
   employeesAddon.employees(await employees(flowsAgents, adapterDB));
 
   const adapterFlow = createFlow([...flowsAgents, ...flows]);
-
+  const mockAdapterDB = new MockAdapter()
   createBot({
     flow: adapterFlow,
     provider: adapterProvider,
-    database: adapterDB,
+    database: mockAdapterDB,
   });
 
   httpServer.start();
