@@ -1,5 +1,7 @@
 const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
 
+const LIMIT_TEXT = parseInt(process.env.LIMIT_TEXT ?? 800)
+
 const flowNotEmployeeWelcome = addKeyword(EVENTS.ACTION)
   .addAction((_, { endFlow }) => {
     if (!globalState.status) {
@@ -18,9 +20,13 @@ const flowWelcome = (globalState, employeesAddon) =>
     .addAction(async (ctx, ctxFn) => {
       const text = ctx.body;
       const currentState = ctxFn.state.getMyState();
+      
+      if(fullSentence.length > LIMIT_TEXT){
+        ctxFn.state.update({ answer: '' });
+      }
+      
       const fullSentence = `${currentState?.answer ?? ""}. ${text}`;
       const { employee, answer } = await employeesAddon.determine(fullSentence);
-      console.log({employee, fullSentence })
       ctxFn.state.update({ answer });
       if (employee) employeesAddon.gotoFlow(employee, ctxFn);
       if (!employee) ctxFn.gotoFlow(flowNotEmployeeWelcome);
