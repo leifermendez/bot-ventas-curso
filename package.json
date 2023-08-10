@@ -16,7 +16,7 @@
         "@bot-whatsapp/portal": "^0.1.30",
         "@bot-whatsapp/provider": "^0.1.30",
         "@ffmpeg-installer/ffmpeg": "^1.1.0",
-        "@whiskeysockets/baileys": "^6.4.0",
+        "@whiskeysockets/baileys": "github:WhiskeySockets/Baileys#store-crashfix",
         "bot-ws-plugin-openai": "^1.0.5",
         "bull": "^4.11.2",
         "dotenv": "^16.1.3",
