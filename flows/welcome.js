@@ -6,7 +6,7 @@ const flowNotEmployeeWelcome = addKeyword(EVENTS.ACTION)
       return endFlow();
     }
   })
-  .addAnswer("No entendi puedes explicarte mejor");
+  .addAnswer("No entendi, me puedes escribir todo en un mensaje...😶");
 /**
  * Flujo principal
  * @param {*} employeesAddon

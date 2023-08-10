@@ -1,3 +1,5 @@
+- dockerizar
+- cola de procesos
 - emojis
 - afinar el prompt para que se asegure de dar el precio
 - afinar prompt para respuestas mas cortas
@@ -5,12 +7,11 @@
 - reiniciar de vez en cuando cada 30 min ?
 - limpiar \n
 - intencion de despedida
-- cola de procesos
-- dockerizar
 - seguimiento de clientes que no compraron
 - que pasa cuando llegan sticker
 - no entendi puedes explicarte mejor: editarlo por algo más natural
 - como manejar los mensajes que viene separados [cuanto, el curso]
+- info de mas cursos
 
 
 

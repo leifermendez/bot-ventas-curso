@@ -1,0 +1,10 @@
+version: '3'
+services:
+  chatbot_vendedor:
+    build:
+      context: ./   # Ruta al directorio donde se encuentra el Dockerfile
+      dockerfile: Dockerfile   # Nombre del Dockerfile
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    # command: npm start

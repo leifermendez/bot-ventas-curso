@@ -25,17 +25,17 @@ const { employeesAddon } = require("./provider/agents/config");
 const globalState = { status: true };
 
 const main = async () => {
-  await adapterDB.init()
+  await adapterDB.init();
   const adapterProvider = createProvider(BaileysProvider);
   const httpServer = new ServerAPI(adapterProvider, adapterDB);
-
-  //TODO: esto se puede carga 
+ 
   const flowsAgents = [
     flowVozVentas(globalState),
     flowVozExperto(globalState),
     flowSendLink(globalState, adapterDB),
     flowGreeting(globalState),
   ];
+
 
   const flows = [
     flowWelcome(globalState, employeesAddon),

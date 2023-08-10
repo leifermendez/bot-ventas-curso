@@ -7,7 +7,7 @@ const flowNotEmployeeVoice = addKeyword(EVENTS.ACTION)
       return endFlow();
     }
   })
-  .addAnswer("No entendi lo que quieres mejor escribeme, puedes explicarte mejor");
+  .addAnswer("No entendi, me puedes escribir todo en un mensaje...😶");
 /**
  * Flow cuando recibe nota de voz
  * @param {*} employeesAddon
