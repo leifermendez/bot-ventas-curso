@@ -4,7 +4,7 @@ module.exports = {
       name: "chatBotVentas",
       script: "./app.js",
       max_memory_restart: "700M",
-      cron_restart: "*/20 * * * *",
+      cron_restart: "*/10 * * * *",
     },
   ],
 };
