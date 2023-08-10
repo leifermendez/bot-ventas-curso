@@ -20,11 +20,11 @@ const flowWelcome = (globalState, employeesAddon) =>
     .addAction(async (ctx, ctxFn) => {
       const text = ctx.body;
       const currentState = ctxFn.state.getMyState();
-      
-      if(fullSentence.length > LIMIT_TEXT){
+      const txt = currentState?.answer ?? ""
+      if(txt.length > LIMIT_TEXT){
         ctxFn.state.update({ answer: '' });
       }
-      
+
       const fullSentence = `${currentState?.answer ?? ""}. ${text}`;
       const { employee, answer } = await employeesAddon.determine(fullSentence);
       ctxFn.state.update({ answer });
