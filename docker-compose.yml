@@ -7,4 +7,5 @@ services:
     ports:
       - "3000:3000"
     working_dir: /app
+    restart: always
     # command: npm start
