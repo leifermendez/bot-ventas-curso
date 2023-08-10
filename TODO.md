@@ -1,4 +1,5 @@
-- dockerizar
+- [x] dockerizar
+- cambiar nombre de agentes
 - cola de procesos
 - emojis
 - afinar el prompt para que se asegure de dar el precio
