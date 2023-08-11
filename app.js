@@ -16,6 +16,8 @@ const {
   flowOn,
   flowOff,
   flowGreeting,
+  flowThankyou,
+  flowAgent,
 } = require("./flows");
 
 const { adapterDB } = require("./provider/database");
@@ -34,6 +36,7 @@ const main = async () => {
     flowVozExperto(globalState),
     flowSendLink(globalState, adapterDB),
     flowGreeting(globalState),
+    flowAgent(globalState)
   ];
 
 
@@ -45,6 +48,7 @@ const main = async () => {
     flowAudioVideo(globalState),
     flowOn(globalState),
     flowOff(globalState),
+    flowThankyou(globalState),
   ];
 
   employeesAddon.employees(await employees(flowsAgents, adapterDB));

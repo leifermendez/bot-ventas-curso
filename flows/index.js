@@ -8,6 +8,8 @@ const { flowAdios } = require("./bye.js");
 const { flowVoiceNote } = require("./giveVoiceNote");
 const { flowOff, flowOn } = require("./onOff");
 const { flowGreeting } = require("./greeting");
+const { flowThankyou } = require("./thankyou");
+const { flowAgent } = require("./agent");
 
 module.exports = {
   flowWelcome,
@@ -20,5 +22,7 @@ module.exports = {
   flowVoiceNote,
   flowOn,
   flowOff,
-  flowGreeting
+  flowGreeting,
+  flowThankyou,
+  flowAgent
 };

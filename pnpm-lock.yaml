@@ -1,12 +1,16 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@adiwajshing/keyed-db':
     specifier: ^0.2.4
     version: 0.2.4
   '@bot-whatsapp/bot':
-    specifier: ^0.1.30
-    version: 0.1.30
+    specifier: ^0.0.138-alpha.0
+    version: 0.0.138-alpha.0
   '@bot-whatsapp/cli':
     specifier: ^0.1.30
     version: 0.1.30
@@ -898,6 +902,12 @@ packages:
       tslib: 2.5.2
     dev: false
     optional: true
+
+  /@bot-whatsapp/bot@0.0.138-alpha.0:
+    resolution: {integrity: sha512-Aonjaw3Q9pGijZRfR80uS0OaISzqcsFbnWGyGdpIUhfU/Dlsbv0XmU1OehM8Cz4A+WYUGSEZOvTiunhdwpY+5Q==}
+    dependencies:
+      dotenv: 16.1.3
+    dev: false
 
   /@bot-whatsapp/bot@0.1.30:
     resolution: {integrity: sha512-2rJq1voGeu5YUC3VplXII8/vd3KxFuNSvV9Gv8Ix/DFxEJDpo7xQkbKlUzicjQX+RfZ9zkDI0LUTSAH0KnhNFg==}
