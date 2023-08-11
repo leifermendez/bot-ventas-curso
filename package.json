@@ -10,7 +10,7 @@
     "keywords": [],
     "dependencies": {
         "@adiwajshing/keyed-db": "^0.2.4",
-        "@bot-whatsapp/bot": "^0.1.30",
+        "@bot-whatsapp/bot": "^0.0.138-alpha.0",
         "@bot-whatsapp/cli": "^0.1.30",
         "@bot-whatsapp/database": "^0.1.30",
         "@bot-whatsapp/portal": "^0.1.30",
