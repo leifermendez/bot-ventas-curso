@@ -6,5 +6,7 @@ services:
       dockerfile: Dockerfile   # Nombre del Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - ./bot_sessions:/app/bot_sessions
     working_dir: /app
     restart: always
