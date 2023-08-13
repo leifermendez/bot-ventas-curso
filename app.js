@@ -34,6 +34,9 @@ const main = async () => {
   const adapterProvider = createProvider(BaileysProvider);
   const httpServer = new ServerAPI(adapterProvider, adapterDB);
  
+  /**
+   * ESTO SE TIENE QUE REMPLAZAR
+   */
   const flowsAgents = [
     flowVozVentas(globalState),
     flowVozExperto(globalState),
