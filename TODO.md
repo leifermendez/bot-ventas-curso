@@ -17,7 +17,8 @@
 
 
 #############################
-
+- [] state global
+- [] algo como injeccion de dependencias
 En `flows` se puede cambiar la exportacion para defaul y un `index.js` como cargador
 si hacemos esto podemos simplemente crear un archivo y automaticamnte se carge
 en el app

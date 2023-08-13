@@ -23,6 +23,9 @@ const {
 const { adapterDB } = require("./provider/database");
 const { employees } = require("./provider/agents");
 const { employeesAddon } = require("./provider/agents/config");
+// const loadSmartFlows = require("./smartFlow");
+
+// console.log('>>>',loadSmartFlows)
 
 const globalState = { status: true };
 
