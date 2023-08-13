@@ -58,6 +58,9 @@ const main = async () => {
 
   const adapterFlow = createFlow([...flowsAgents, ...flows]);
 
+  /**
+   * en la part de createBot podemos agregar la parte de extension
+   */
   createBot({
     flow: adapterFlow,
     provider: adapterProvider,

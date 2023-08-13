@@ -6,7 +6,12 @@ const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
  */
 const flowAudioVideo = (globalState) =>
   addKeyword(EVENTS.MEDIA)
-    .addAction((_, { endFlow }) => {
+    .addAction((_, { endFlow, state }) => {
+
+      const currentState = state.getMyState();
+      const baned = currentState?.baned ?? false
+      if(baned) return endFlow();
+
       if (!globalState.status) {
         return endFlow();
       }

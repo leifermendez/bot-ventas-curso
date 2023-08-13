@@ -6,7 +6,12 @@ const { addKeyword } = require("@bot-whatsapp/bot");
  */
 const flowAdios = (globalState) =>
   addKeyword(["adios", "bye", "chao"])
-    .addAction((_, { endFlow }) => {
+    .addAction((_, { endFlow, state }) => {
+
+      const currentState = state.getMyState();
+      const baned = currentState?.baned ?? false
+      if(baned) return endFlow();
+
       if (!globalState.status) {
         return endFlow();
       }

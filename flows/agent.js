@@ -5,10 +5,18 @@ const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
  */
 const flowAgent = (globalState) =>
   addKeyword(EVENTS.ACTION)
-    .addAction((_, { endFlow }) => {
+    .addAction((_, { endFlow, state }) => {
+
+      const currentState = state.getMyState();
+      const baned = currentState?.baned ?? false
+      if(baned) return endFlow();
+
       if (!globalState.status) {
         return endFlow();
       }
+
+   
+
     })
     .addAnswer(
       ["un momento... consultado disponibilidad de agentes"],

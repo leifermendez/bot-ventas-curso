@@ -5,8 +5,13 @@ const { delay } = require("../utils/utils");
  * Flow de explicacion experta
  */
 const flowGreeting = (globalState) =>
-  addKeyword(['hola','ole','hi'])
-    .addAction((_, { endFlow }) => {
+  addKeyword(['hola','hi'])
+    .addAction((_, { endFlow, state }) => {
+
+      const currentState = state.getMyState();
+      const baned = currentState?.baned ?? false
+      if(baned) return endFlow();
+
       if (!globalState.status) {
         return endFlow();
       }
