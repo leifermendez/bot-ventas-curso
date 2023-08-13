@@ -7,7 +7,7 @@ const flowNotEmployeeVoice = addKeyword(EVENTS.ACTION)
       return endFlow();
     }
   })
-  .addAnswer("No entendi, me puedes escribir todo en un mensaje...😶");
+  .addAnswer(["Hmm no estoy seguro...", "Recuerda que estoy diseñado para asistir sobre el curso y vender el curso. ¿Tienes alguna pregunta sobre el curso?"]);
 /**
  * Flow cuando recibe nota de voz
  * @param {*} employeesAddon
