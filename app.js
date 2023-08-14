@@ -62,9 +62,10 @@ const main = async () => {
   const adapterFlow = createFlow([...flowsAgents, ...flows]);
 
   /**
-   * en la part de createBot podemos agregar la parte de extension
+   * - Como segundo argumento podemos pasar properties como globalState, extensions
+   * - Como tercer argumento una funcion que se ejecute internamente como un listener
    */
-  createBot({
+  const bot = createBot({
     flow: adapterFlow,
     provider: adapterProvider,
     database: adapterDB,

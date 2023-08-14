@@ -22,3 +22,10 @@
 En `flows` se puede cambiar la exportacion para defaul y un `index.js` como cargador
 si hacemos esto podemos simplemente crear un archivo y automaticamnte se carge
 en el app
+
+#############################
+SmartFlow
+
+- Se debe usar un modelo el más economico / rapido para poder determinar la intencion
+y selecionar el flujo ideal
+- Dentro del flujo ideal se ejecutara...

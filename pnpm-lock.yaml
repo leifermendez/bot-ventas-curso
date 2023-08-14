@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.2.4
     version: 0.2.4
   '@bot-whatsapp/bot':
-    specifier: ^0.0.138-alpha.0
-    version: 0.0.138-alpha.0
+    specifier: ^0.0.140-alpha.0
+    version: 0.0.140-alpha.0
   '@bot-whatsapp/cli':
     specifier: ^0.1.30
     version: 0.1.30
@@ -903,8 +903,8 @@ packages:
     dev: false
     optional: true
 
-  /@bot-whatsapp/bot@0.0.138-alpha.0:
-    resolution: {integrity: sha512-Aonjaw3Q9pGijZRfR80uS0OaISzqcsFbnWGyGdpIUhfU/Dlsbv0XmU1OehM8Cz4A+WYUGSEZOvTiunhdwpY+5Q==}
+  /@bot-whatsapp/bot@0.0.140-alpha.0:
+    resolution: {integrity: sha512-hW282airimtXmpIqWkbv2h4eIERpS+gg7yUnN2PwexQjufHCaVQ/OET1sPrLifzi/T5dckpiEETrK486NGhPUQ==}
     dependencies:
       dotenv: 16.1.3
     dev: false
