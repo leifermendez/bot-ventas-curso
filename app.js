@@ -37,7 +37,7 @@ const main = async () => {
 
   const adapterProvider = createProvider(BaileysProvider);
   const httpServer = new ServerAPI(adapterProvider, adapterDB);
- 
+
   /**
    * ESTO SE TIENE QUE REMPLAZAR
    */
@@ -75,8 +75,15 @@ const main = async () => {
     flow: adapterFlow,
     provider: adapterProvider,
     database: adapterDB,
+  }, {
+    extensions: {
+      employeesAddon,
+      globalState: {
+        state: true
+      }
+    }
   });
-  
+
 
   httpServer.start();
 };
