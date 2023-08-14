@@ -1,4 +1,5 @@
 const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
+const { handlerAI } = require("../utils/utils");
 
 /**
  * - Debe ser capaz de buscar info en pinecone
