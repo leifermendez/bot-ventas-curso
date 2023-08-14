@@ -24,7 +24,7 @@ class MongoAdapter {
 
   clearHistory = async (from) => {
     this.listHistory = []
-    await this.db.collection("history").deleteMany({from});
+    await this.db.collection("history").deleteMany({ from });
   }
 
   getPrevByNumber = async (from) => {
@@ -61,6 +61,18 @@ class MongoAdapter {
       );
   };
 
+  sentimentCustomer = async (phone, sentiment) => {
+    await this.db.collection("sentiments").findOneAndUpdate(
+      { phone },
+      { $set: { sentiment, date: new Date() } },
+      {
+        sort: { dateAt: -1 },
+        upsert: true,
+        returnOriginal: false
+      }
+    );
+  };
+
   findIntent = async (phone) => {
     return await this.db
       .collection("intents")
@@ -69,6 +81,29 @@ class MongoAdapter {
 
   getAgents = async () => {
     return await this.db.collection("agents").find({}).toArray();
+  };
+
+  getLatestHistoyry = async (numLimit) => {
+    const result = await this.db.collection("history").aggregate([
+      {
+        $group: {
+          _id: "$from",
+          historial: { $push: "$answer" }
+        }
+      },
+      {
+        $limit: numLimit
+      },
+      {
+        $project: {
+          _id: 0,
+          numero: "$_id",
+          historial: { $slice: ["$historial", -10] }
+        }
+      }
+    ])
+
+    return result.toArray();
   };
 }
 

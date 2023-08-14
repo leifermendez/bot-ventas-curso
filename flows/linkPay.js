@@ -1,5 +1,12 @@
-const { addKeyword } = require("@bot-whatsapp/bot");
+const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
+const { join } = require('path')
 const { handlerStripe } = require("../services/stripe");
+
+
+const flowFallBackEmail = () => addKeyword(EVENTS.ACTION).addAnswer([
+  `🤦‍♂️`,
+  'Mejor empezamos de nuevo ¿Como te puedo ayudar?',
+  'Recuerda que estoy aquí para vender...'])
 
 /**
  * Flow Generar Link de Pago
@@ -12,7 +19,7 @@ const flowSendLink = (globalState, adapterDB) =>
 
       const currentState = state.getMyState();
       const baned = currentState?.baned ?? false
-      if(baned) return endFlow();
+      if (baned) return endFlow();
 
       if (!globalState.status) {
         return endFlow();
@@ -25,16 +32,25 @@ const flowSendLink = (globalState, adapterDB) =>
     .addAnswer(
       `Solo un dato más ¿Cual es tu email?`,
       { capture: true },
-      async (ctx, { fallBack, state, flowDynamic }) => {
+      async (ctx, { fallBack, state, flowDynamic, gotoFlow }) => {
+        const currentState = state.getMyState();
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const email = ctx.body;
+        const fallBackEmail = currentState?.fallBackEmail ?? 0
 
         if (!emailRegex.test(email)) {
+
+
+          if (fallBackEmail > 2) {
+            return gotoFlow(flowFallBackEmail())
+          }
+
+          state.update({ fallBackEmail: fallBackEmail + 1 })
           return fallBack("Debes introducir un email valido");
         }
         state.update({ email });
-        await flowDynamic([{body:`El cupon lo debes de aplicar aqui`, media: "https://i.imgur.com/Y1rBTFu.png"}]);
-        const currentState = state.getMyState();
+        await flowDynamic([{ body: `El cupon lo debes de aplicar aqui`, media: "https://i.imgur.com/Y1rBTFu.png" }]);
+
         const response = await handlerStripe(ctx.from, currentState.email);
         await adapterDB.createIntent({
           url: response.url,
@@ -48,4 +64,4 @@ const flowSendLink = (globalState, adapterDB) =>
       }
     );
 
-module.exports = { flowSendLink };
+module.exports = { flowSendLink, flowFallBackEmail };

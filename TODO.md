@@ -8,9 +8,9 @@
 - reiniciar de vez en cuando cada 30 min ?
 - limpiar \n
 - intencion de despedida
-- seguimiento de clientes que no compraron
+- seguimiento de clientes que no compraron ??
 - que pasa cuando llegan sticker
-- no entendi puedes explicarte mejor: editarlo por algo más natural
+- [x] no entendi puedes explicarte mejor: editarlo por algo más natural
 - como manejar los mensajes que viene separados [cuanto, el curso]
 - info de mas cursos
 

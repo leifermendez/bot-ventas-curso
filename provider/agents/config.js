@@ -7,4 +7,4 @@ const employeesAddonConfig = {
 };
 const employeesAddon = init(employeesAddonConfig);
 
-module.exports = { employeesAddon };
+module.exports = { employeesAddon, employeesAddonConfig };

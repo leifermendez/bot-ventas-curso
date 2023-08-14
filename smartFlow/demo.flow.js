@@ -1,4 +1,4 @@
-const { addKeyword } = require("@bot-whatsapp/bot");
+const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
 
 /**
  * - Debe ser capaz de buscar info en pinecone
@@ -7,9 +7,22 @@ const { addKeyword } = require("@bot-whatsapp/bot");
  * - Enviar nuevamente a GPT para dar respuesta compacta y amable
  * - bot-ws-plugin: Obtener el input original
  */
-module.exports = addKeyword('DEMO').addAnswer('Hola demo', null , async ({exentions, state, globalState}) => {
-    const adapterDB = exentions.adapterDB
-    const employeesAddon = exentions.employeesAddon
-    const pinecone = extension.pinecone
-    const queue = extension.queue
-})
+
+module.exports = addKeyword(EVENTS.VOICE_NOTE)
+    .addAction((_, { endFlow, globalState }) => {
+        const currentGlobalState = globalState.getMyState();
+        if (!currentGlobalState.status) {
+            return endFlow();
+        }
+    })
+    .addAction(async (ctx, ctxFn) => {
+        const employeesAddon = ctxFn.extensions.employeesAddon
+        await ctxFn.flowDynamic("dame un momento para escucharte...🙉");
+        const text = await handlerAI(ctx);
+        const currentState = ctxFn.state.getMyState();
+        const fullSentence = `${currentState?.answer ?? ""}. ${text}`;
+        const { employee, answer } = await employeesAddon.determine(fullSentence);
+        ctxFn.state.update({ answer });
+        if (employee) employeesAddon.gotoFlow(employee, ctxFn);
+        if (!employee) ctxFn.gotoFlow(flowNotEmployeeVoice);
+    });
