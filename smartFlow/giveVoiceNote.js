@@ -1,5 +1,6 @@
 const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
 const { handlerAI } = require("../utils/utils");
+const notEmployee = require("./notEmployee");
 
 /**
  * - Debe ser capaz de buscar info en pinecone
@@ -17,6 +18,7 @@ module.exports = addKeyword(EVENTS.VOICE_NOTE)
         }
     })
     .addAction(async (ctx, ctxFn) => {
+        console.log(`[Flow Smart VoiceNote]`)
         const employeesAddon = ctxFn.extensions.employeesAddon
         await ctxFn.flowDynamic("dame un momento para escucharte...🙉");
         const text = await handlerAI(ctx);
@@ -25,5 +27,5 @@ module.exports = addKeyword(EVENTS.VOICE_NOTE)
         const { employee, answer } = await employeesAddon.determine(fullSentence);
         ctxFn.state.update({ answer });
         if (employee) employeesAddon.gotoFlow(employee, ctxFn);
-        if (!employee) ctxFn.gotoFlow(flowNotEmployeeVoice);
+        if (!employee) ctxFn.gotoFlow(notEmployee);
     });

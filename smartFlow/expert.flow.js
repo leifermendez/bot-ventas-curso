@@ -1,5 +1,5 @@
 const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
-const { textToVoice } = require("../services/eventlab");
+const { delay } = require("../utils/utils");
 
 module.exports = addKeyword(EVENTS.ACTION)
     .addAction((_, { endFlow, globalState }) => {
@@ -8,16 +8,17 @@ module.exports = addKeyword(EVENTS.ACTION)
         if (!currentGlobalState.status) {
             return endFlow();
         }
-
     })
     .addAnswer(
-        ["dame un momento... mejor te envio nota de voz"],
+        ["dame un momento..."],
         null,
         async (_, { flowDynamic, state }) => {
-            console.log("🙉 texto a voz....");
             const currentState = state.getMyState();
-            const path = await textToVoice(currentState.answer);
-            console.log(`🙉 Fin texto a voz....[PATH]:${path}`);
-            await flowDynamic([{ body: "escucha", media: path }]);
+
+            const fullText = currentState.answer.split(". ");
+            for (const txt of fullText) {
+                await flowDynamic(txt);
+                await delay(1150);
+            }
         }
     );

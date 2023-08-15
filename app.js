@@ -24,12 +24,23 @@ const {
 const { adapterDB } = require("./provider/database");
 const { employees } = require("./provider/agents");
 const { employeesAddon } = require("./provider/agents/config");
-const demoFlow = require("./smartFlow/demo.flow");
+
+const giveVoiceNote = require("./smartFlow/giveVoiceNote");
+const welcome = require("./smartFlow/welcome");
+const bye = require("./smartFlow/bye");
+const givePdf = require("./smartFlow/givePdf");
+const giveMedia = require("./smartFlow/giveMedia");
+const turnOff = require("./smartFlow/turnOff");
+const turnOn = require("./smartFlow/turnOn");
+const thankyou = require("./smartFlow/thankyou");
+const fallBackEmail = require("./smartFlow/fallBackEmail");
+const notEmployee = require("./smartFlow/notEmployee");
+const ventasFlow = require("./smartFlow/ventas.flow");
+const expertFlow = require("./smartFlow/expert.flow");
+const linkPayFlow = require("./smartFlow/linkPay.flow");
+const greetingFlow = require("./smartFlow/greeting.flow");
+const agentFlow = require("./smartFlow/agent.flow");
 // const loadSmartFlows = require("./smartFlow");
-
-// console.log('>>>',loadSmartFlows)
-
-const globalState = { status: true };
 
 const main = async () => {
   await adapterDB.init();
@@ -42,25 +53,25 @@ const main = async () => {
    * ESTO SE TIENE QUE REMPLAZAR
    */
   const flowsAgents = [
-    flowVozVentas(globalState),
-    flowVozExperto(globalState),
-    flowSendLink(globalState, adapterDB),
-    flowGreeting(globalState),
-    flowAgent(globalState)
+    ventasFlow,
+    expertFlow,
+    linkPayFlow,
+    greetingFlow,
+    agentFlow
   ];
 
 
   const flows = [
-    flowWelcome(globalState, employeesAddon),
-    // flowVoiceNote(globalState, employeesAddon),
-    demoFlow,
-    flowAdios(globalState),
-    flowPDF(globalState),
-    flowAudioVideo(globalState),
-    flowOn(globalState),
-    flowOff(globalState),
-    flowThankyou(globalState),
-    flowFallBackEmail(globalState)
+    welcome,
+    giveVoiceNote,
+    bye,
+    givePdf,
+    giveMedia,
+    turnOff,
+    turnOn,
+    thankyou,
+    fallBackEmail,
+    notEmployee
   ];
 
   employeesAddon.employees(await employees(flowsAgents, adapterDB));
@@ -71,16 +82,17 @@ const main = async () => {
    * - Como segundo argumento podemos pasar properties como globalState, extensions
    * - Como tercer argumento una funcion que se ejecute internamente como un listener
    */
-  const bot = createBot({
+  createBot({
     flow: adapterFlow,
     provider: adapterProvider,
     database: adapterDB,
   }, {
+    globalState: {
+      status: true
+    },
     extensions: {
       employeesAddon,
-      globalState: {
-        state: true
-      }
+      database: adapterDB,
     }
   });
 
