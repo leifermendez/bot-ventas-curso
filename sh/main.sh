@@ -5,7 +5,7 @@ REPO_DIR="/root/bot-ventas-curso"
 DOCKER_COMPOSE_FILE="${REPO_DIR}/docker-compose.yml"
 
 # Nombre del servicio Docker Compose que deseas reiniciar
-SERVICE_NAME="bot_ventas_docker"
+SERVICE_NAME="chatbot_vendedor"
 
 # Cambiar al directorio del repositorio
 cd "$REPO_DIR" || exit
