@@ -1,16 +1,12 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@adiwajshing/keyed-db':
     specifier: ^0.2.4
     version: 0.2.4
   '@bot-whatsapp/bot':
-    specifier: 0.0.147-alpha.0
-    version: 0.0.147-alpha.0
+    specifier: 0.0.148-alpha.0
+    version: 0.0.148-alpha.0
   '@bot-whatsapp/cli':
     specifier: ^0.1.30
     version: 0.1.30
@@ -903,8 +899,8 @@ packages:
     dev: false
     optional: true
 
-  /@bot-whatsapp/bot@0.0.147-alpha.0:
-    resolution: {integrity: sha512-EoPQDb0tjCgpKIlNNPN9M0Necc6PH0uCU6l12CXSECZI1QexCIXTSmM68ifj14Y96au5JMFDQNi7hplkRKxNJg==}
+  /@bot-whatsapp/bot@0.0.148-alpha.0:
+    resolution: {integrity: sha512-2E6FLIq1l+eH+5AdBcs1ellsvvNgSrrymh05EX9vN+1JvtOYgetYLiM5XsYiTJdDzd2e293lWt6lVZ4H8B++xg==}
     dependencies:
       dotenv: 16.1.3
     dev: false
@@ -3311,3 +3307,7 @@ packages:
       curve25519-js: 0.0.4
       protobufjs: 6.8.8
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
