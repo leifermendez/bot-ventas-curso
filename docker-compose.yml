@@ -8,7 +8,5 @@ services:
       - "3000:3000"
     volumes:
       - ./bot_sessions:/app/bot_sessions
-      - ./.env:/app/.env
-      - ./core.class.log:/app/core.class.log
     working_dir: /app
     restart: always
