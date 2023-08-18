@@ -11,4 +11,4 @@ WORKDIR /app
 COPY --from=builder /app ./
 ARG PUBLIC_URL
 ARG PORT
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
