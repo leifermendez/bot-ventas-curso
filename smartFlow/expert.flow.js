@@ -10,11 +10,13 @@ module.exports = addKeyword(EVENTS.ACTION)
         }
     })
     .addAnswer(
-        ["dame un momento..."],
+        ["dame un momento-..."],
         null,
         async (_, { flowDynamic, state }) => {
             const currentState = state.getMyState();
-
+            if(!currentState?.answer){
+                return
+            }
             const fullText = currentState.answer.split(". ");
             for (const txt of fullText) {
                 await flowDynamic(txt);

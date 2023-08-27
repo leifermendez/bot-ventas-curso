@@ -17,7 +17,7 @@ const flowVozExperto = (globalState) =>
       }
     })
     .addAnswer(
-      ["dame un momento..."],
+      ["dame un momento*..."],
       null,
       async (_, { flowDynamic, state }) => {
         const currentState = state.getMyState();

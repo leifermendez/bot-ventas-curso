@@ -11,14 +11,15 @@
 - seguimiento de clientes que no compraron ??
 - que pasa cuando llegan sticker
 - [x] no entendi puedes explicarte mejor: editarlo por algo más natural
-- como manejar los mensajes que viene separados [cuanto, el curso]
+- [ ] como manejar los mensajes que viene separados [cuanto, el curso]
+    se me ocurre consultar si existe un prceso en ejecuccion y de ser asi fallBack message
 - info de mas cursos
-
+- [] NO permitir injeccion de ROLES
 
 
 #############################
-- [] state global
-- [] algo como injeccion de dependencias
+- [x] state global
+- [x] algo como injeccion de dependencias
 En `flows` se puede cambiar la exportacion para defaul y un `index.js` como cargador
 si hacemos esto podemos simplemente crear un archivo y automaticamnte se carge
 en el app

@@ -6,7 +6,7 @@ const LIMIT_TEXT = parseInt(process.env.LIMIT_TEXT ?? 800)
 module.exports = addKeyword(EVENTS.WELCOME)
     .addAnswer("⏱️")
     .addAction(async (ctx, ctxFn) => {
-        console.log(`[Flow Smart Welcome]`)
+        console.log(`[Flow Smart Welcome]:${ctx.body}`)
         const employeesAddon = ctxFn.extensions.employeesAddon
         const text = ctx.body;
         const currentState = ctxFn.state.getMyState();
