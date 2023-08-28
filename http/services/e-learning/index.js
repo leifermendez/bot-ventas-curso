@@ -47,7 +47,7 @@ const register = async (email) => {
         name:'Custom WS',
         description: 'Soy un comprador desde el Bot de WS',
         email,
-        password:'soy_chatbot_01',
+        password:`soy_chatbot_${Date.now()}`,
         byRefCode: "LEIFERMENDEZ",
       }),
     }
