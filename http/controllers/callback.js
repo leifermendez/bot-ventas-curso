@@ -37,13 +37,17 @@ const ctrlCallBack = async (req, res) => {
       `${phone}@c.us`,
       [
         "Felicitaciones! ya tienes acceso al curso 🙌",
+        "un mail te llegara en los proximos minutos",
         "Si tienes algun inconveniente puedes escribirme un mail a leifer.contacto@gmail.com",
       ].join("\n")
     );
     const code = await exchange(COURSE_ID, email);
+    console.log(`Registando usuario:${email}`)
     if (code === 404) {
-      await register(email);
-      await exchange(COURSE_ID, email);
+      const tmpUser = await register(email);
+      console.log(`Registando usuario otra vez:${email}`,tmpUser)
+      const tmp = await exchange(COURSE_ID, email);
+      console.log(`¿Se libero?:`,tmp)
     }
     res.redirect("https://app.codigoencasa.com/courses/curso-chatbot-whatsapp");
   }

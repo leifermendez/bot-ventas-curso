@@ -34,7 +34,7 @@ module.exports = addKeyword(["andorra"])
                 state.update({ fallBackEmail: fallBackEmail + 1 })
                 return fallBack("Debes introducir un email valido");
             }
-            state.update({ email });
+            state.update({ email:email.toLowerCase() });
             await flowDynamic(`dame un momento para generarte un link de pago`); 
             await flowDynamic([{ body: `El cupon lo debes de aplicar aqui`, media: "https://i.imgur.com/Y1rBTFu.png" }]);
 
