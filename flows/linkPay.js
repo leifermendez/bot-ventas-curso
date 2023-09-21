@@ -50,11 +50,12 @@ const flowSendLink = (globalState, adapterDB) =>
         }
         state.update({ email });
         await flowDynamic([{ body: `El cupon lo debes de aplicar aqui`, media: "https://i.imgur.com/Y1rBTFu.png" }]);
-
+        const name = ctx?.pushName ?? ctx.ProfileName.split(" ").shift();
         const response = await handlerStripe(ctx.from, currentState.email);
         await adapterDB.createIntent({
           url: response.url,
           phone: ctx.from,
+          name: name,
           status: "wait",
           dateAt: new Date(),
           email: currentState.email,
