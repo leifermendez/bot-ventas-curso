@@ -1,4 +1,5 @@
 const { addKeyword, EVENTS } = require("@bot-whatsapp/bot");
+const {join} = require('path')
 
 module.exports = addKeyword(EVENTS.ACTION)
     .addAction((_, { endFlow, globalState }) => {
@@ -10,15 +11,13 @@ module.exports = addKeyword(EVENTS.ACTION)
     })
     .addAnswer(
         ["un momento... consultado disponibilidad de agentes"],
-        { delay: 2500 },
-        async (_, { flowDynamic }) => {
-            await flowDynamic([
-                {
-                    body: `Actualmente el agente Leifer esta saturado lo siento 🤷‍♂️`
-                },
-                {
-                    body: `Si tienes una consulta más urgente te recomiendo enviar un mail a leifer.contacto@gmail.com`
-                }
-            ]);
-        }
-    );
+        { delay: 2500 }
+    )
+    .addAnswer(
+        ["sigo contactando a un agente 🙌"],
+        { delay: 1500 }
+    )
+    .addAction(async (_,{flowDynamic}) => {
+        const path = join(process.cwd(),'audio','audio-1.mp3')
+        await flowDynamic([{ body: "escucha", media: path }]);
+    })

@@ -2,6 +2,7 @@ const { addKeyword } = require("@bot-whatsapp/bot");
 
 const fallBackEmailFlow = require('./fallBackEmail');
 const { handlerStripe } = require("../services/stripe");
+const chatwootMiddleware = require("../middleware/chatwoot.middleware");
 
 module.exports = addKeyword(["andorra"])
     .addAction((_, { endFlow, globalState }) => {
@@ -10,23 +11,19 @@ module.exports = addKeyword(["andorra"])
             return endFlow();
         }
     })
-    .addAnswer(["🚀🚀"], null, async (_, { flowDynamic, state }) => {
-        const currentState = state.getMyState();
-        await flowDynamic(currentState);
-    })
+    .addAction(chatwootMiddleware)
     .addAnswer(
         `Solo un dato más ¿Cual es tu email?`,
         { capture: true },
         async (ctx, { fallBack, state, flowDynamic, gotoFlow, extensions }) => {
             const adapterDB = extensions.database
+            const chatwood = extensions.chatwood;
             const currentState = state.getMyState();
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             const email = ctx.body;
             const fallBackEmail = currentState?.fallBackEmail ?? 0
 
             if (!emailRegex.test(email)) {
-
-
                 if (fallBackEmail > 2) {
                     return gotoFlow(fallBackEmailFlow)
                 }
@@ -47,6 +44,12 @@ module.exports = addKeyword(["andorra"])
                 email: currentState.email,
             });
             state.update({ answer: "" });
-            await flowDynamic(`Este es tu link: ${response.url}`);
+            const msgLinkPay = `Este es tu link: ${response.url}`
+            await flowDynamic(msgLinkPay);
+            await chatwood.createMessage({
+                msg: msgLinkPay,
+                mode: "outgoing",
+                conversationId: currentState.conversation_id,
+            });
         }
     );

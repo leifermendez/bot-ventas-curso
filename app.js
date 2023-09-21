@@ -4,23 +4,6 @@ const BaileysProvider = require("@bot-whatsapp/provider/baileys");
 
 const ServerAPI = require("./http");
 
-const {
-  flowWelcome,
-  flowVozVentas,
-  flowAdios,
-  flowAudioVideo,
-  flowPDF,
-  flowSendLink,
-  flowVoiceNote,
-  flowVozExperto,
-  flowOn,
-  flowOff,
-  flowGreeting,
-  flowThankyou,
-  flowAgent,
-  flowFallBackEmail,
-} = require("./flows");
-
 const { adapterDB } = require("./provider/database");
 const { employees } = require("./provider/agents");
 const { employeesAddon } = require("./provider/agents/config");
@@ -40,26 +23,25 @@ const expertFlow = require("./smartFlow/expert.flow");
 const linkPayFlow = require("./smartFlow/linkPay.flow");
 const greetingFlow = require("./smartFlow/greeting.flow");
 const agentFlow = require("./smartFlow/agent.flow");
+const ChatWood = require("./services/chatwood");
 // const loadSmartFlows = require("./smartFlow");
 
 const main = async () => {
   await adapterDB.init();
-
-
+  const chatwood = new ChatWood(
+    process.env.CHATWOOT_ID, process.env.CHATWOOT_URL, {
+    accounts: 1,
+  });
   const adapterProvider = createProvider(BaileysProvider);
   const httpServer = new ServerAPI(adapterProvider, adapterDB);
 
-  /**
-   * ESTO SE TIENE QUE REMPLAZAR
-   */
   const flowsAgents = [
     ventasFlow,
     expertFlow,
     linkPayFlow,
     greetingFlow,
-    agentFlow
+    agentFlow,
   ];
-
 
   const flows = [
     welcome,
@@ -71,31 +53,31 @@ const main = async () => {
     turnOn,
     thankyou,
     fallBackEmail,
-    notEmployee
+    notEmployee,
   ];
 
   employeesAddon.employees(await employees(flowsAgents, adapterDB));
 
   const adapterFlow = createFlow([...flowsAgents, ...flows]);
 
-  /**
-   * - Como segundo argumento podemos pasar properties como globalState, extensions
-   * - Como tercer argumento una funcion que se ejecute internamente como un listener
-   */
-  createBot({
-    flow: adapterFlow,
-    provider: adapterProvider,
-    database: adapterDB,
-  }, {
-    globalState: {
-      status: true
-    },
-    extensions: {
-      employeesAddon,
+  createBot(
+    {
+      flow: adapterFlow,
+      provider: adapterProvider,
       database: adapterDB,
+    },
+    {
+      globalState: {
+        status: true,
+        inbox_id: 11, //id inbox Leifer-Ventas
+      },
+      extensions: {
+        employeesAddon,
+        database: adapterDB,
+        chatwood
+      },
     }
-  });
-
+  );
 
   httpServer.start();
 };
